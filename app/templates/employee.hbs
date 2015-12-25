@@ -1,0 +1,12 @@
+<div>
+{{#each model as |employee|}}
+  <div>
+  {{employee.id}}
+  {{employee.first}}
+  {{employee.last}}
+  {{employee.position}}
+  {{employee.salary}}
+  </div>
+{{/each}}
+</div>
+{{outlet}}
