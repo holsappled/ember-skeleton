@@ -8,24 +8,38 @@ export default Ember.Route.extend({
     //return this.store.findAll('employee');
     return [{
       id: '0',
-      first: 'Bob',
-      last: 'Jones',
+      first: 'Bill',
+      last: 'Lumbergh',
       position: 'Boss',
       salary: '100000',
     },
     {
       id: '1',
-      first: 'Alice',
-      last: 'Jones',
+      first: 'Peter',
+      last: 'Gibbons',
       position: 'Employee',
       salary: '50000',
     },
     {
       id: '2',
-      first: 'Jim',
-      last: 'Jones',
+      first: 'Michael',
+      last: 'Bolton',
       position: 'Employee',
       salary: '50000',
+    },
+    {
+      id: '3',
+      first: 'Samir',
+      last: 'Nagheenanajar',
+      position: 'Employee',
+      salary: '50000',
+    },
+    {
+      id: '4',
+      first: 'Milton',
+      last: 'Waddams',
+      position: 'Employee',
+      salary: '0',
     }];
   },
   afterModel: function() {
