@@ -6,4 +6,4 @@ export default DS.Model.extend({
   last: DS.attr('last'),
   position: DS.attr('position'),
   salary: DS.attr('salary'),
-})
+});
