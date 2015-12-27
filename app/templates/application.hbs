@@ -1,5 +1,21 @@
-<h2 id="title">Initech</h2>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">Initech</div>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>{{#link-to 'application'}}Home{{/link-to}}</li>
+        <li>{{#link-to 'employee'}}Employees{{/link-to}}</li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-{{#link-to 'employee'}}Employees{{/link-to}}
-
-{{outlet}}
+<div class="row">
+  <div class="col-md-2" />
+  <div class="col-md-8">
+    {{outlet}}
+  </div>
+  <div class="col-md-2" />
+</div>

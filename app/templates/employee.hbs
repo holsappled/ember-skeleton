@@ -1,5 +1,5 @@
-<div>
-<table>
+<table class="table table-condensed table-striped">
+<tbody>
 {{#each model as |employee|}}
   <tr>
   <td>{{employee.id}}</td>
@@ -9,6 +9,5 @@
   <td>{{employee.salary}}</td>
   </tr>
 {{/each}}
+</tbody>
 </table>
-</div>
-{{outlet}}
