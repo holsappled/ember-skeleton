@@ -1,48 +1,30 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+
   model: function() {
-    // This uses the built in
-    // http://emberjs.com/api/data/classes/DS.RESTAdapter.html to fetch data.
-    //
-    //return this.store.findAll('employee');
-    return [{
-      id: '0',
-      first: 'Bill',
-      last: 'Lumbergh',
-      position: 'Boss',
-      salary: '100000',
-    },
-    {
-      id: '1',
-      first: 'Peter',
-      last: 'Gibbons',
-      position: 'Employee',
-      salary: '50000',
-    },
-    {
-      id: '2',
-      first: 'Michael',
-      last: 'Bolton',
-      position: 'Employee',
-      salary: '50000',
-    },
-    {
-      id: '3',
-      first: 'Samir',
-      last: 'Nagheenanajar',
-      position: 'Employee',
-      salary: '50000',
-    },
-    {
-      id: '4',
-      first: 'Milton',
-      last: 'Waddams',
-      position: 'Employee',
-      salary: '0',
-    }];
+    return this.store.findAll('employee');
   },
+
   afterModel: function() {
     Ember.$(document).attr('title', 'Employee Data');
   },
+
+  actions: {
+    createEmployee: function() {
+      // This is the computed property that we created in
+      // controllers/employee.js.
+      var controller = this.get('controller');
+      var employeeName = controller.get('newName');
+      console.log('Creating an employee: ', employeeName);
+      this.store.createRecord('employee', {
+        first: employeeName,
+        last: employeeName,
+        position: 'Employee',
+        salary: '0',
+      }).save().then(function() {
+        controller.set('newName', '');
+      });
+    }
+  }
 });

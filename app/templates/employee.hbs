@@ -1,13 +1,19 @@
-<table class="table table-condensed table-striped">
-<tbody>
-{{#each model as |employee|}}
-  <tr>
-  <td>{{employee.id}}</td>
-  <td>{{employee.first}}</td>
-  <td>{{employee.last}}</td>
-  <td>{{employee.position}}</td>
-  <td>{{employee.salary}}</td>
-  </tr>
-{{/each}}
-</tbody>
-</table>
+<div class="col-md-4">
+  <div class="list-group">
+    <div class="list-group-item">
+      {{input type="text" class="new-employee" placeholder="New Employee" value=newName}}
+      <button class="btn btn-primary btn-sm new-artist-button" {{action "createEmployee"}}
+        {{bind-attr disabled=disabled}}>Add</button>
+    </div>
+    {{#each model as |employee|}}
+      <div class="list-group-item">
+        {{employee.last}}, {{employee.first}}
+      </div>
+    {{/each}}
+  </div>
+</div>
+<div class="col-md-8">
+  <div class="list-group">
+    {{outlet}}
+  </div>
+</div>
