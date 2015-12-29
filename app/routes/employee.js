@@ -16,7 +16,6 @@ export default Ember.Route.extend({
       // controllers/employee.js.
       var controller = this.get('controller');
       var employeeName = controller.get('newName');
-      console.log('Creating an employee: ', employeeName);
       this.store.createRecord('employee', {
         first: employeeName,
         last: employeeName,

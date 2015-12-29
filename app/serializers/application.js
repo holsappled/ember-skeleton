@@ -12,7 +12,11 @@ export default DS.JSONAPISerializer.extend({
   },
 
   /**
-   * Flask-Restless does not follow http://jsonapi.org/.
+   * Normalize a Flask-Restless response.
+   *
+   * A Flask-Restless response needs additionally normalizing since it does not
+   * currently follow the JSON API specification at http://jsonapi.org/.
+   *
    */
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
     var json = {
@@ -21,17 +25,23 @@ export default DS.JSONAPISerializer.extend({
 
     // Handle normalization of response with a single entity.
     if (!payload.hasOwnProperty('objects')) {
-      return this._super(...arguments);
-    }
+      json['data'] = {
+        'id': payload['id'],
+        'type': primaryModelClass.modelName,
+        'attributes': payload,
+      };
 
     // Handle normalization of response with many entities.
-    for (var i = 0; i < payload['objects'].length; i++) {
-      json['data'].push({
-        type: primaryModelClass.modelName,
-        id: payload['objects'][i]['id'],
-        attributes: payload['objects'][i],
-      });
+    } else {
+      for (var i = 0; i < payload['objects'].length; i++) {
+        json['data'].push({
+          type: primaryModelClass.modelName,
+          id: payload['objects'][i]['id'],
+          attributes: payload['objects'][i],
+        });
+      }
     }
+
     // TODO(sholsapp): Handle pagination here somehow, we're only returning
     // part of the data.
     return this._super(store, primaryModelClass, json, id, requestType);
