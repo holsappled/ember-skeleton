@@ -20,6 +20,11 @@ export default Ember.Route.extend({
      * the database.
      */
     createEmployee: function() {
+      // TODO(sholsapp): This action also needs to consider refreshing the
+      // model (from the databse) so that we can make sure the paginated
+      // context is correct. Right now, if you add too many employees this way,
+      // when you split over into the next page, the next button isn't enabled
+      // because none of the metadata is refreshed.
       var route = this;
       var controller = this.get('controller');
       var employeeName = controller.get('newName');
