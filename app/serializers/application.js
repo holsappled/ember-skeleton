@@ -1,16 +1,13 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-
 export default DS.JSONAPISerializer.extend({
-
   /**
    * Flask-Restless always uses underscores.
    */
   keyForAttribute: function(attr) {
     return Ember.String.underscore(attr);
   },
-
   /**
    * Normalize a Flask-Restless response.
    *
@@ -20,7 +17,8 @@ export default DS.JSONAPISerializer.extend({
    */
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {
     var json = {
-      data: []
+      data: [],
+      meta: null,
     };
 
     // Handle normalization of response with a single entity.
@@ -33,7 +31,13 @@ export default DS.JSONAPISerializer.extend({
 
     // Handle normalization of response with many entities.
     } else {
-      for (var i = 0; i < payload['objects'].length; i++) {
+      json['meta'] = {
+        pagination: {
+          totalPages: payload['total_pages'],
+          page: payload['page'],
+        }
+      };
+      for (let i = 0; i < payload['objects'].length; i++) {
         json['data'].push({
           type: primaryModelClass.modelName,
           id: payload['objects'][i]['id'],
@@ -46,7 +50,6 @@ export default DS.JSONAPISerializer.extend({
     // part of the data.
     return this._super(store, primaryModelClass, json, id, requestType);
   },
-
   /**
    * Flask-Restless does not follow http://jsonapi.org/.
    */
@@ -57,5 +60,4 @@ export default DS.JSONAPISerializer.extend({
     });
     return json;
   },
-
 });
