@@ -15,7 +15,12 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self'",
+      // We allow 'unsafe-eval' because Chart.js is a piece of shit and I can't
+      // figure out how to fix it (see
+      // https://github.com/nnnick/Chart.js/issues/281). If going to
+      // production, we should not allow 'unsafe-eval' and find a chart library
+      // that works.
+      'script-src': "'self' 'unsafe-eval' ",
       'font-src': "'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com ",
       'connect-src': "'self' http://localhost:5000 ",
       'img-src': "'self'",
