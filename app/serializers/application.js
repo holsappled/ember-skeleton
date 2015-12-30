@@ -55,6 +55,8 @@ export default DS.JSONAPISerializer.extend({
    */
   serialize(snapshot, options) {
     var json = {};
+    // JSHint is being annoying
+    options = options;
     snapshot.eachAttribute(function(name) {
       json[name] = snapshot.attr(name);
     });
