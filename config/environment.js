@@ -22,7 +22,7 @@ module.exports = function(environment) {
       // that works.
       'script-src': "'self' 'unsafe-eval' ",
       'font-src': "'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com ",
-      'connect-src': "'self' http://localhost:5000 ",
+      'connect-src': "'self' http://127.0.0.1:5000 ",
       'img-src': "'self'",
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com ",
       'media-src': "'self'"
