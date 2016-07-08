@@ -7,6 +7,13 @@
       <ul class="nav navbar-nav">
         <li>{{#link-to 'application'}}Home{{/link-to}}</li>
         <li>{{#link-to 'employee'}}Employees{{/link-to}}</li>
+        <li>
+        {{#if session.isAuthenticated}}
+          <a id="logout" {{ action 'invalidateSession' }}>Logout</a>
+        {{else}}
+        {{#link-to 'login'}}Login{{/link-to}}
+        {{/if}}
+        </li>
       </ul>
     </div>
   </div>
